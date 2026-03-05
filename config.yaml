@@ -1,0 +1,8 @@
+hive:
+  database: sales_db
+  table: transactions
+
+checks:
+  - duplicates
+  - nulls
+  - rowcount
