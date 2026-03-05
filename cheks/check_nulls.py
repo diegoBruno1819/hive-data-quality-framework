@@ -1,13 +1,9 @@
 import subprocess
 
-
 def check_nulls(table):
 
-    query = f"""
-    SELECT COUNT(*)
-    FROM {table}
-    WHERE id IS NULL
-    """
+    with open("sql/nulls_query.sql") as file:
+        query = file.read().format(table=table)
 
     result = subprocess.check_output(["hive", "-e", query])
 
