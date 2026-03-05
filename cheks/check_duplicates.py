@@ -1,17 +1,9 @@
 import subprocess
 
-
 def check_duplicates(table):
 
-    query = f"""
-    SELECT COUNT(*)
-    FROM (
-        SELECT id, COUNT(*)
-        FROM {table}
-        GROUP BY id
-        HAVING COUNT(*) > 1
-    ) t
-    """
+    with open("sql/duplicates_query.sql") as file:
+        query = file.read().format(table=table)
 
     result = subprocess.check_output(["hive", "-e", query])
 
